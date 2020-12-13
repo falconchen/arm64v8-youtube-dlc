@@ -13,17 +13,17 @@ RUN set -xe \
                           openssl \
                           aria2 \
     && pip install --upgrade pip \
-    && pip install youtube-dl \
+    && pip install youtube-dlc \
     && mkdir -p /videos \
     && mkdir -p /audios
 
-COPY ./youtube-dl.conf /etc/youtube-dl.conf
+COPY ./youtube-dl.conf /etc/youtube-dlc.conf
 
 # Try to run it so we know it works
-RUN youtube-dl --version
+RUN youtube-dlc --version
 
 WORKDIR /data
 
 VOLUME ["/data"]
-ENTRYPOINT ["youtube-dl"]
+ENTRYPOINT ["youtube-dlc"]
 CMD ["--help"]
